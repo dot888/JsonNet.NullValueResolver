@@ -1,0 +1,1 @@
+c:\users\woshi\documents\visual studio 2015\Projects\JsonNetNullValueResolver\JsonNetNullValueResolver\bin\Debug\JsonNetNullValueResolver.exe.config
