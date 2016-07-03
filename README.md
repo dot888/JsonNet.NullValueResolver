@@ -48,3 +48,46 @@ JsonNet.NullValueResolver就是为解决这些问题而来。
 >
 >
 其它操作不变，这样在序列化时，将能够自动处理NULL值这些问题，开发过程中，经常还会遇到要传时间戳的问题，比如给APP端传时间时传时间戳，APP端给Server端传数据时也要传时间戳，这个例子里也有写，可以很方便的进行自由转换。
+
+### 示例代码：
+
+        static void Main(string[] args)
+        {
+            var responseModel = new[] { new ResponseModel() };
+            responseModel[0].IsSuccess = true;
+
+            //Entity --> null
+            responseModel[0].Entity = null;
+
+
+            // JsonNet Configuration
+            JsonConvert.DefaultSettings = (() =>
+            {
+                var settings = new JsonSerializerSettings();
+                settings.ContractResolver = new NullValueResolver();
+                return settings;
+            });
+
+
+            Console.WriteLine("Before Serialize：");
+            Console.Write("TestDate:");
+            responseModel[0].TestDate = DateTime.Now;
+            Console.WriteLine(responseModel[0].TestDate);
+
+            Console.WriteLine("----------------------------");
+
+            //serialize object to json
+            var jsonResult = JsonConvert.SerializeObject(responseModel);
+            Console.WriteLine(jsonResult);
+
+
+            Console.WriteLine("----------------------------");
+
+            //deserialize json string to object
+            var inputJsonResult = JsonConvert.DeserializeAnonymousType(jsonResult, responseModel);
+            Console.WriteLine("After Deserialized：");
+            Console.Write("TestDate:");
+            Console.WriteLine(inputJsonResult[0].TestDate);
+
+            Console.ReadLine();
+        }
