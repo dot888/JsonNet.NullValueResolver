@@ -91,3 +91,13 @@ JsonNet.NullValueResolver就是为解决这些问题而来。
 
             Console.ReadLine();
         }
+
+### 运行结果
+
+    Before Serialize：
+    TestDate:2016/7/3 20:17:41
+    ----------------------------
+    [{"IsSuccess":true,"Entity":{},"TestDate":"1467548261","NullableDate":"0001-01-01T00:00:00","NullableBool":false,"NullableGuid":"00000000-0000-0000-0000-000000000000"}]
+    ----------------------------
+    After Deserialized：
+    TestDate:2016/7/3 20:17:41
